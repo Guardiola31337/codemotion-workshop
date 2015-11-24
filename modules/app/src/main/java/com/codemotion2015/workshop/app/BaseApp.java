@@ -18,10 +18,11 @@ package com.codemotion2015.workshop.app;
 
 import android.app.Application;
 import com.codemotion2015.workshop.events.EventsPort;
-import com.codemotion2015.workshop.events.InMemoryEventsAdapter;
+import com.codemotion2015.workshop.events.OttoEventsAdapter;
 import com.codemotion2015.workshop.modules.vertical.notes.NotesModule;
 import com.codemotion2015.workshop.storage.InMemoryStorageAdapter;
 import com.codemotion2015.workshop.storage.StoragePort;
+import com.squareup.otto.Bus;
 
 public class BaseApp extends Application {
 
@@ -30,7 +31,7 @@ public class BaseApp extends Application {
   @Override public void onCreate() {
     super.onCreate();
 
-    eventsPort = new InMemoryEventsAdapter();
+    eventsPort = new OttoEventsAdapter(new Bus());
     StoragePort storagePort = new InMemoryStorageAdapter(eventsPort);
     NotesModule notesModule = new NotesModule(storagePort, eventsPort);
 
