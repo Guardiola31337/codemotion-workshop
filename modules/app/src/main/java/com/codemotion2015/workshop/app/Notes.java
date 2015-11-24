@@ -9,11 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import com.codemotion2015.workshop.events.EventsPort;
+import com.codemotion2015.workshop.modules.horizontal.commons.Callback;
+import com.codemotion2015.workshop.modules.vertical.notes.CreateNoteResponse;
 
 public class Notes extends AppCompatActivity {
 
+  private EventsPort eventsPort;
   private TextView title;
   private TextView description;
+  private Callback callback;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -22,10 +27,19 @@ public class Notes extends AppCompatActivity {
     initToolbar();
     initNote();
     initFAB();
+
+    initEventsPort();
+
+    callback = new Callback<CreateNoteResponse>() {
+      @Override public void call(CreateNoteResponse event) {
+        refreshNoteData(event);
+      }
+    };
   }
 
   @Override protected void onResume() {
     super.onResume();
+    eventsPort.on(CreateNoteResponse.class, callback);
   }
 
   @Override protected void onPause() {
@@ -70,5 +84,15 @@ public class Notes extends AppCompatActivity {
         startActivity(intent);
       }
     });
+  }
+
+  private void initEventsPort() {
+    BaseApp app = (BaseApp) getApplication();
+    eventsPort = app.obtainEventsPort();
+  }
+
+  private void refreshNoteData(CreateNoteResponse event) {
+    title.setText(Integer.toString(event.noteResponse.getTaskId()));
+    description.setText(event.noteResponse.getContent());
   }
 }

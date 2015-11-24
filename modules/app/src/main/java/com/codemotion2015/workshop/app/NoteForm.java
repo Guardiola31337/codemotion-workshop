@@ -22,9 +22,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.codemotion2015.workshop.events.EventsPort;
+import com.codemotion2015.workshop.modules.vertical.notes.CreateNoteCommand;
+import com.codemotion2015.workshop.modules.vertical.notes.NoteDTO;
 
 public class NoteForm extends AppCompatActivity {
 
+  private EventsPort eventsPort;
   private EditText title;
   private EditText description;
 
@@ -35,6 +39,8 @@ public class NoteForm extends AppCompatActivity {
     initToolbar();
     initNoteForm();
     initSaveNoteButton();
+
+    initEventsPort();
   }
 
   private void initToolbar() {
@@ -52,8 +58,22 @@ public class NoteForm extends AppCompatActivity {
     Button saveNote = (Button) findViewById(R.id.btn_save_note);
     saveNote.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-
+        NoteDTO noteToSave = retrieveDataFromForm();
+        eventsPort.broadcast(new CreateNoteCommand(noteToSave));
+        finish();
       }
     });
+  }
+
+  private void initEventsPort() {
+    BaseApp app = (BaseApp) getApplication();
+    eventsPort = app.obtainEventsPort();
+  }
+
+  private NoteDTO retrieveDataFromForm() {
+    int titleValue = Integer.parseInt(title.getText().toString());
+    String descriptionValue = description.getText().toString();
+    NoteDTO note = new NoteDTO(titleValue, descriptionValue);
+    return note;
   }
 }
