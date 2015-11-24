@@ -22,8 +22,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 @RunWith(MyRunner.class) public class NotesAppTest {
@@ -40,5 +42,15 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
   @Test public void fabShouldExist() {
     onView(withId(R.id.fab)).check(matches(notNullValue()));
+  }
+
+  @Test public void whenPressingFabNoteFormActivityShouldStart() {
+    onView(withId(R.id.fab)).check(matches(notNullValue()));
+    onView(withId(R.id.fab)).perform(click());
+
+    onView(withId(R.id.input_title)).check(matches(notNullValue()));
+    onView(withId(R.id.input_description)).check(matches(notNullValue()));
+    onView(withId(R.id.btn_save_note)).check(matches(notNullValue()));
+    onView(withId(R.id.btn_save_note)).check(matches(withText("Save note")));
   }
 }
