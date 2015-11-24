@@ -15,5 +15,9 @@
   -->
 <resources>
   <string name="app_name">Codemotion 2015 Workshop</string>
+  <string name="notes_label">Notes</string>
+
   <string name="action_settings">Settings</string>
+  <string name="note_title">Title</string>
+  <string name="note_description">Description</string>
 </resources>
