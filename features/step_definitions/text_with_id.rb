@@ -1,0 +1,1 @@
+Then /^I see the text "([^\"]*)" in field with id "([^\"]*)"$/ do |text, id| end
