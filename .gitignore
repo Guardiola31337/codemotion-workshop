@@ -1,0 +1,20 @@
+/target
+/.idea
+/.idea_modules
+/project/project
+/project/target
+/proguard-sbt.txt
+modules/*/target/
+/projectFilesBackup
+
+# Calabash - Ruby #
+/.irb-history
+/.ruby-version
+/test_servers
+/screenshot*.png
+
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
