@@ -26,4 +26,7 @@
   <dimen name="note_title_text_size">22sp</dimen>
   <dimen name="note_description_padding">8dp</dimen>
   <dimen name="note_description_text_size">14sp</dimen>
+  <dimen name="note_form_margin_top">14sp</dimen>
+  <dimen name="note_form_padding_left">14sp</dimen>
+  <dimen name="note_form_padding_right">14sp</dimen>
 </resources>

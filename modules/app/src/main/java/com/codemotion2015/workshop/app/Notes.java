@@ -1,5 +1,6 @@
 package com.codemotion2015.workshop.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -65,7 +66,8 @@ public class Notes extends AppCompatActivity {
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-
+        Intent intent = new Intent(Notes.this, NoteForm.class);
+        startActivity(intent);
       }
     });
   }
